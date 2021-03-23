@@ -4,7 +4,7 @@ services:
   web:
     restart: always
     build: ./web
-    expose:
+    ports:
       - "8000"
     links:
       - postgres:postgres
