@@ -36,7 +36,7 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data/
-     environment:
+    environment:
       - POSTGRES_DB=app
       - POSTGRES_USER=obscure-user
       - POSTGRES_PASSWORD=obscure-password
