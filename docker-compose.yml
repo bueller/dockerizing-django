@@ -18,6 +18,8 @@ services:
     command: /usr/local/bin/gunicorn docker_django.wsgi:application -w 2 -b :8000
 
   nginx:
+    labels:
+      shipyard.route: '/'
     restart: always
     build: ./nginx/
     ports:
