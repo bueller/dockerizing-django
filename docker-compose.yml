@@ -4,7 +4,7 @@ services:
   web:
     restart: always
     build: ./web
-    expose:
+    ports:
       - "8000"
     links:
       - postgres:postgres
@@ -18,6 +18,8 @@ services:
     command: /usr/local/bin/gunicorn docker_django.wsgi:application -w 2 -b :8000
 
   nginx:
+    labels:
+      shipyard.route: '/'
     restart: always
     build: ./nginx/
     ports:
@@ -34,6 +36,11 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=obscure-user
+      - POSTGRES_PASSWORD=obscure-password
+      - PGDATA=/var/lib/postgresql/data/
 
   redis:
     restart: always
